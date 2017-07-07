@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+       xmlns:mvc="http://www.springframework.org/schema/mvc"  
+       xmlns:context="http://www.springframework.org/schema/context"  
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+       xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://www.springframework.org/schema/context   
+            http://www.springframework.org/schema/context/spring-context.xsd  
+            http://www.springframework.org/schema/mvc  
+            http://www.springframework.org/schema/mvc/spring-mvc.xsd"
+       default-autowire="byName">
+
+
+    <!-- 开启默认的注解映射支持 -->
+    <mvc:annotation-driven/>
+
+	<!-- 开启注解模式，扫描com.jk.controller包下的所有子包中的所有类，
+	凡是包含@Controller注解的类都会生成控制层实例 -->
+	<context:component-scan base-package="com.controllor"></context:component-scan>
+
+
+    <!-- jsp视图解析器，对模型视图名称的解析，即在模型视图名称添加前后缀
+         如/view/welcome.jsp对应的视图名就是：welcome
+         这个类在视图解析器链中一定要定义在其他视图的后面，因为它始终会返回一个视图
+    -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    	<!-- 返回值的前缀-->
+        <property name="prefix" value="/WEB-INF/view/"/>
+       <!--返回值的后缀-->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+    <!--freemarker视图解释器 -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="suffix">
+            <value>.ftl</value>
+        </property>
+        <property name="contentType" value="text/html;charset=UTF-8"></property>
+    </bean>
+    <!-- 配置freeMarker视图解析器 -->
+    <!--<bean id="viewResolverFtl" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">-->
+        <!--<property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>-->
+        <!--<property name="contentType" value="text/html; charset=utf-8"/>-->
+        <!--<property name="cache" value="true" />-->
+        <!--<property name="suffix" value=".ftl" />-->
+        <!--<property name="order" value="0"/>-->
+    <!--</bean>-->
+
+
+</beans> 

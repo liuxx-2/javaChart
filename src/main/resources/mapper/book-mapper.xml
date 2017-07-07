@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >  
+<mapper namespace="com.dao.book.BookDao">
+
+    <!-- parameterType === parameterClass
+        resultType === resultClass
+        #{} === ##
+        ${} === $$
+     -->
+   <insert id="insertBook" parameterType="book">
+        INSERT INTO t_books
+        (t_name)
+        VALUES
+        (#{t_name})
+   </insert>
+
+    <select id="bookList" resultType="java.util.HashMap">
+        SELECT COUNT(1) AS "usernum",DATE_FORMAT(k.start_time, '%m-%d') AS "regeditdate" FROM kfc k
+              GROUP BY k.start_time
+              ORDER BY k.start_time
+    </select>
+
+
+    <delete id="delete" parameterType="book">
+      DELETE FROM t_books WHERE t_id=${t_id}
+    </delete>
+
+    <select id="update" parameterType="book" resultType="book">
+        SELECT * from t_books WHERE t_id=${t_id}
+    </select>
+    <update id="updateBook" parameterType="book">
+        UPDATE t_books SET t_name=${t_name} WHERE t_id=${t_id}
+    </update>
+</mapper>   
